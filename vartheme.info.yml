@@ -3,7 +3,7 @@ description: 'Base theme for Vardot standard websites. Based on Bootstrap 3 and 
 type: theme
 base theme: bootstrap
 package: 'Varbase'
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10 || ^11
 regions:
   navigation: 'Navigation'
   navigation_collapsible: 'Navigation (Collapsible)'
@@ -61,7 +61,7 @@ libraries:
 
 # Vartheme Better Login theme.
   - vartheme/betterlogin
-  
+
 # Vartheme Varbase Bootstrap Paragraphs colors theme.
 libraries-override:
   varbase_bootstrap_paragraphs/vbp-colors: vartheme/vbp-colors
