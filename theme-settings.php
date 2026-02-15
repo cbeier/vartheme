@@ -44,8 +44,8 @@ function vartheme_form_system_theme_settings_alter(&$form, FormStateInterface $f
   $form['vartheme_general']['header']['header_container'] = [
     '#type' => 'checkbox',
     '#title' => t('Header Fluid Container'),
-    '#description' => t('Use <code>.container-fluid</code> class instead of <code>.container</code> for the Header region.<br />See: @vartheme_link', [
-      '@vartheme_link' => Link::fromTextAndUrl('Fluid container', Url::fromUri('http://getbootstrap.com/css/', ['absolute' => TRUE, 'fragment' => 'grid-example-fluid'])),
+    '#description' => t('Use <code>.container-fluid</code> class instead of <code>.container</code> for the Header region.<br />See: :vartheme_link', [
+      ':vartheme_link' => Link::fromTextAndUrl('Fluid container', Url::fromUri('http://getbootstrap.com/css/', ['absolute' => TRUE, 'fragment' => 'grid-example-fluid']))->toString(),
     ]),
     '#default_value' => $theme_config->get('header_container'),
   ];
