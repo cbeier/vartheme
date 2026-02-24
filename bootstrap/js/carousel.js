@@ -180,7 +180,21 @@
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
       var action  = typeof option == 'string' ? option : options.slide
 
-      if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
+      if (!data) {
+        // Bootstrap 3 expects at least one .item.active in HTML. If the template
+        // does not set it (e.g. Drupal/Vartheme), set it on the first .item and
+        // first indicator so the carousel works.
+        var $inner = $this.find('.carousel-inner')
+        var $items = $inner.children('.item')
+        if ($items.length && !$inner.find('.item.active').length) {
+          $items.first().addClass('active')
+          var $indicators = $this.find('.carousel-indicators')
+          if ($indicators.length) {
+            $indicators.children().first().addClass('active')
+          }
+        }
+        $this.data('bs.carousel', (data = new Carousel(this, options)))
+      }
       if (typeof option == 'number') data.to(option)
       else if (action) data[action]()
       else if (options.interval) data.pause().cycle()
