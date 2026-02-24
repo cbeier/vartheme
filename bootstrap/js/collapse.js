@@ -11,6 +11,13 @@
 +function ($) {
   'use strict';
 
+  // jQuery 4 removed $.camelCase; provide a local helper for kebab-case to camelCase
+  function camelCase(str) {
+    return (str + '').replace(/-([a-z])/g, function (_, letter) {
+      return letter.toUpperCase();
+    });
+  }
+
   // COLLAPSE PUBLIC CLASS DEFINITION
   // ================================
 
@@ -87,7 +94,7 @@
 
     if (!$.support.transition) return complete.call(this)
 
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+    var scrollSize = camelCase(['scroll', dimension].join('-'))
 
     this.$element
       .one('bsTransitionEnd', $.proxy(complete, this))
@@ -173,7 +180,7 @@
       var data    = $this.data('bs.collapse')
       var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
-      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data && options.toggle && typeof option === 'string' && /show|hide/.test(option)) options.toggle = false
       if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
       if (typeof option == 'string') data[option]()
     })
